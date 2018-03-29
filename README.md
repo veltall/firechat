@@ -2,7 +2,7 @@
 
 A tutorial Flutter project.
 
-<img src="./res/images/firechat0.png" width="250">
+<img src="./res/images/firechat0.png" width="250"> <img src="./res/images/firechat1.jpg" width="250"> 
 
 ## Source
 

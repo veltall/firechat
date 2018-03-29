@@ -256,7 +256,7 @@ class ChatMessage extends StatelessWidget {
                       new Container(
                         child: new Text( 'just now',
                                 style: Theme.of(context).textTheme.caption),
-                        margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                        margin: const EdgeInsets.symmetric(horizontal: 8.0),
                       )
                     ],
                   ),
