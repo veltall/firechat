@@ -292,25 +292,25 @@ class ChatMessage extends StatelessWidget {
       retval = "$hours hours ago";
     else switch(snaptime.weekday) {   // why, dart, why...
       case 1:
-        retval = "Monday - ${snaptime.hour}:${snaptime.minute}";
+        retval = "Monday ${snaptime.month}, ${snaptime.day} - ${snaptime.hour}:${snaptime.minute}";
         break;
       case 2:
-        retval = "Monday - ${snaptime.hour}:${snaptime.minute}";
+        retval = "Tuesday ${snaptime.month}, ${snaptime.day} - ${snaptime.hour}:${snaptime.minute}";
         break;
       case 3:
-        retval = "Monday - ${snaptime.hour}:${snaptime.minute}";
+        retval = "Wednesday ${snaptime.month}, ${snaptime.day} - ${snaptime.hour}:${snaptime.minute}";
         break;
       case 4:
-        retval = "Monday - ${snaptime.hour}:${snaptime.minute}";
+        retval = "Thursday ${snaptime.month}, ${snaptime.day} - ${snaptime.hour}:${snaptime.minute}";
         break;
       case 5:
-        retval = "Monday - ${snaptime.hour}:${snaptime.minute}";
+        retval = "Friday ${snaptime.month}, ${snaptime.day} - ${snaptime.hour}:${snaptime.minute}";
         break;
       case 6:
-        retval = "Monday - ${snaptime.hour}:${snaptime.minute}";
+        retval = "Saturday ${snaptime.month}, ${snaptime.day} - ${snaptime.hour}:${snaptime.minute}";
         break;
       case 7:
-        retval = "Monday - ${snaptime.hour}:${snaptime.minute}";
+        retval = "Sunday ${snaptime.month}, ${snaptime.day} - ${snaptime.hour}:${snaptime.minute}";
         break;
       default:
         retval = "invalid time, you dun goofed bruh";
