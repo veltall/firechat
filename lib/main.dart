@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'dart:async';
 import 'dart:math';
 import 'dart:io';
+import 'dart:core';
 
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -201,22 +202,13 @@ class ChatScreenState extends State<ChatScreen> {
   }
 
   void _sendMessage({ String text, String imageUrl }) {
-    /* ChatMessage message = new ChatMessage(
-      text: text,
-      animationController: new AnimationController(
-        duration: new Duration(milliseconds: 700),
-        vsync: this,
-      ),
-    );
-    setState( () {
-      _messages.insert(0, message);
-    });
-    message.animationController.forward(); */
+    DateTime timestamp = new DateTime.now();
     reference.push().set({
       'text': text,
       'imageUrl': imageUrl,
       'senderName': googleSignIn.currentUser.displayName,
       'senderPhotoUrl': googleSignIn.currentUser.photoUrl,
+      'time': timestamp.millisecondsSinceEpoch,
     });
     analytics.logEvent(name: 'send_message');
   }
@@ -254,8 +246,8 @@ class ChatMessage extends StatelessWidget {
                       new Text( snapshot.value['senderName'],
                                 style: Theme.of(context).textTheme.subhead),
                       new Container(
-                        child: new Text( 'just now',
-                                style: Theme.of(context).textTheme.caption),
+                        child:  new Text( _getTimeDifference(),
+                                          style: Theme.of(context).textTheme.caption),
                         margin: const EdgeInsets.symmetric(horizontal: 8.0),
                       )
                     ],
@@ -276,6 +268,54 @@ class ChatMessage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  // don't ask questions
+  String _getTimeDifference() {
+    var snaptime = new DateTime.fromMillisecondsSinceEpoch(snapshot.value['time']);
+    var ima = new DateTime.now();
+    Duration dur = ima.difference(snaptime);
+    int seconds = dur.inSeconds; 
+    int minutes = dur.inMinutes;
+    int hours   = dur.inHours;
+    var retval = "";
+    
+    if (seconds <= 15)
+      retval = "just now";
+    else if (minutes < 2)
+      retval = "a minute ago";
+    else if (minutes < 60)
+      retval = "$minutes minutes ago";
+    else if (hours < 2)
+      retval = "an hour ago";
+    else if (hours < 24)
+      retval = "$hours hours ago";
+    else switch(snaptime.weekday) {   // why, dart, why...
+      case 1:
+        retval = "Monday - ${snaptime.hour}:${snaptime.minute}";
+        break;
+      case 2:
+        retval = "Monday - ${snaptime.hour}:${snaptime.minute}";
+        break;
+      case 3:
+        retval = "Monday - ${snaptime.hour}:${snaptime.minute}";
+        break;
+      case 4:
+        retval = "Monday - ${snaptime.hour}:${snaptime.minute}";
+        break;
+      case 5:
+        retval = "Monday - ${snaptime.hour}:${snaptime.minute}";
+        break;
+      case 6:
+        retval = "Monday - ${snaptime.hour}:${snaptime.minute}";
+        break;
+      case 7:
+        retval = "Monday - ${snaptime.hour}:${snaptime.minute}";
+        break;
+      default:
+        retval = "invalid time, you dun goofed bruh";
+    }
+    return retval;
   }
 
 }
